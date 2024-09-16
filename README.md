@@ -1,0 +1,2 @@
+# Hexion
+A Discord bot.
