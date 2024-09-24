@@ -1,6 +1,8 @@
 import lightbulb
 from hexion import client
 import time
+from datetime import datetime 
+from hexion.utils.embed import create_embed
 
 loader = lightbulb.Loader()
 
@@ -15,6 +17,13 @@ class Ping(
         msg = await ctx.respond("Pinging...")
         stop = (time.monotonic() - start) * 1000
         heartbeat = round(ctx.client.app.heartbeat_latency * 1000)
-        await ctx.edit_response(
-            msg, f"Heartbeat: `{int(heartbeat):.2f}`ms\nRest API: `{int(stop):.2f}`ms"
-        )
+        em = create_embed(ctx)
+        em.title = ":ping_pong: Pong!"
+        em.add_field(name = "**Heartbeat**", 
+                     value = f"`{int(heartbeat):.2f}ms`")
+        em.add_field(name = "**Rest API**", 
+                     value = f"`{int(stop):.2f}ms`")
+        await ctx.edit_response(msg,
+                                content = None,
+                                embed = em)
+    
