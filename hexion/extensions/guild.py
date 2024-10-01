@@ -12,14 +12,16 @@ class Avatar(
     user = lightbulb.user(
         "user", "The user who's avatar needs to be displayed.", default=None
     )
+    user_id = lightbulb.string("userid", "The user ID duh.", default = None
+    )
 
     @lightbulb.invoke
     async def invoke(self, ctx):
         await ctx.defer()
         em = create_embed(ctx)
-        if not self.user:
-            user = ctx.interaction.user
-        else:
+        user = ctx.interaction.user
+        if self.user_id:                                               user = await ctx.client.app.rest.fetch_user(self.user_id)
+        if self.user and not self.user_id:
             user = self.user
         em.set_image(user.avatar_url).set_author(
             name=user.username, icon=user.avatar_url
