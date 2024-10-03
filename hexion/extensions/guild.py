@@ -3,6 +3,7 @@ from hexion.utils import create_embed
 
 loader = lightbulb.Loader()
 
+
 @loader.command
 class Avatar(
     lightbulb.SlashCommand, name="avatar", description="Display's the avatar of a user."
@@ -19,13 +20,12 @@ class Avatar(
     @lightbulb.invoke
     async def invoke(self, ctx):
         await ctx.defer()
-        em = create_embed(ctx)
         user = ctx.interaction.user
         if self.user_id:
             user = await ctx.client.app.rest.fetch_user(self.user_id)
         if self.user and not self.user_id:
             user = self.user
-        em.color = user.accent_color
+        em = create_embed(ctx, color = user.accent_color)
         if not self.display:
             av = user.make_avatar_url(size=self.size)
         else:
@@ -50,8 +50,7 @@ class Banner(
     async def invoke(self, ctx):
         user = ctx.interaction.user if not self.user else self.user
         user = await ctx.client.app.rest.fetch_user(user.id)
-        em = create_embed(ctx)
-        em.color = user.accent_color
+        em = create_embed(ctx, color = user.accent_color)
         em.set_image(user.banner_url).set_author(
             name=user.username, icon=user.avatar_url
         )
