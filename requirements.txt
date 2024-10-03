@@ -1,2 +1,2 @@
-hikari==2.0.0
-hikari-lightbulb==3.0.0a12
+hikari==2.1.0
+hikari-lightbulb==3.0.0a13
