@@ -1,11 +1,9 @@
 import lightbulb
-from hexion import client
 from hexion.utils import create_embed
 
 loader = lightbulb.Loader()
 
-
-@client.register
+@loader.command
 class Avatar(
     lightbulb.SlashCommand, name="avatar", description="Display's the avatar of a user."
 ):
@@ -40,7 +38,7 @@ class Avatar(
         await ctx.respond(embed=em)
 
 
-@client.register
+@loader.command
 class Banner(
     lightbulb.SlashCommand, name="banner", description="Get the banner of a user."
 ):

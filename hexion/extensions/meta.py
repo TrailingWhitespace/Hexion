@@ -1,13 +1,11 @@
 import lightbulb
-from hexion import client
 import time
-from datetime import datetime
 from hexion.utils.embed import create_embed
 
 loader = lightbulb.Loader()
 
 
-@client.register
+@loader.command
 class Ping(
     lightbulb.SlashCommand, name="ping", description="Returns the latency of the bot."
 ):
