@@ -1,2 +1,3 @@
 hikari==2.1.0
 hikari-lightbulb==3.0.0a13
+Pillow==10.4.0

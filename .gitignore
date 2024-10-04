@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 hexion/config.py
+hexion/command_data
+.ruff_cache/

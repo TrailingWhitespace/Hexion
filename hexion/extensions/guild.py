@@ -1,5 +1,6 @@
 import lightbulb
 from hexion.utils import create_embed
+from PIL import Image
 
 loader = lightbulb.Loader()
 
@@ -51,7 +52,12 @@ class Banner(
         user = ctx.interaction.user if not self.user else self.user
         user = await ctx.client.app.rest.fetch_user(user.id)
         em = create_embed(ctx, color = user.accent_color)
-        em.set_image(user.banner_url).set_author(
+        img = user.banner_url
+        if not user.banner_url:
+            img = Image.new('RGB', (1080, 432), user.accent_color)
+            img.save("./hexion/command_data/banner.png")
+            img = "./hexion/command_data/banner.png"
+        em.set_image(img).set_author(
             name=user.username, icon=user.avatar_url
         )
         em.title = f"{user.display_name}'s banner"
